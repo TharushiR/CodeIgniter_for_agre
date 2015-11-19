@@ -67,6 +67,7 @@ header {
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
+  border-bottom: 1px #e7eaec solid;
 }
 .nav-sidebar > .active > a {
   color: #fff;
