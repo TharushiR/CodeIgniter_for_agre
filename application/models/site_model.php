@@ -16,16 +16,14 @@ class site_model extends Ci_Model{
 
 	function update_record($data)
 	{
-		$this->db->where('id' , 2);
+		$this->db->where('id' , 3);
 		$this->db->update('data', $data);
 	}
 
-	function delete_row($data)
+	function delete_row()
 	{
-		$this->db->where('id', $this->url->segment(3));
+		$this->db->where('id', $this->uri->segment(3));
 		$this->db->delete('data');
-
-		return;
 	}
 }
 ?>

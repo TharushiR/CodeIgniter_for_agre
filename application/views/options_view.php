@@ -28,6 +28,22 @@
 	<hr />
 
 	<h2>Read from database</h2>
+	<?php if(isset($records)) : foreach($records as $row) : ?>
+    	
+    	<h2><?php echo anchor("site/delete/$row->id", $row->title); ?></h2>
+    	<div><?php echo $row->contents; ?></div>
+    <?php endforeach;?>
+    <?php else :?>
+    <h2>No records were returned.</h2>
+	<?php endif;?>
+
+	<hr />
+
+	<h2>Delete</h2>
+
+	<p>To sample the delete method, simply click on one of the
+		headings listed above. A Delete query will automatically run.</p>
+
 
 </body>
 </html>
