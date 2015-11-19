@@ -1,21 +1,31 @@
 <?php
 
 class site_model extends Ci_Model{
-	function getAll(){
-		$q = $this->db->get('test');
 
-		if($q->num_rows() > 0){
-			foreach ($q->result() as $row)
-			{
-			        $data[] = $row;
-			}
-		return $data;
+	function get_records()
+	{
+		$query = $this->db->get('data');
+		return $query->result();
+	}
 
-		}else{
-			echo 'error! geting data!';
-		}
+	function add_record($data)
+	{
+		$this->db->insert('data' , $data);
+		return;
+	}
 
-		
+	function update_record($data)
+	{
+		$this->db->where('id' , 2);
+		$this->db->update('data', $data);
+	}
+
+	function delete_row($data)
+	{
+		$this->db->where('id', $this->url->segment(3));
+		$this->db->delete('data');
+
+		return;
 	}
 }
 ?>
