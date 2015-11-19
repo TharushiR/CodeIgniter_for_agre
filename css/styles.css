@@ -43,6 +43,19 @@ footer {
   }
 }
 
+#content {
+   margin: 20px 0px 50px 0px;
+   background-color: #fff;
+}
+
+header {
+   border-top: 4px #e7eaec solid;
+
+}
+
+.form-wrapper{
+  padding: 10px;
+}
 
 /* Sidebar navigation */
 .nav-sidebar {
@@ -57,9 +70,25 @@ footer {
 }
 .nav-sidebar > .active > a {
   color: #fff;
-  background-color: #428bca;
+  background-color: #2196F3;
 }
 
+#side-bar a:hover {
+  color: #fff;
+  background-color: #2980b9;
+  display: block; 
+
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  background-color: #fff;
+  padding: 8px;
+  font-size: 12px;
+  color: #676;
+}
 /*
  * Main content
  */
