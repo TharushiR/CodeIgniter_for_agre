@@ -54,7 +54,9 @@ if($user->isLoggedIn()){
 <div class="container-fluid">
       <br>
       <div class="row row-offcanvas row-offcanvas-left">
-        
+        <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+          </p>
          <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
            
             <ul id="side-bar" class="nav nav-sidebar">
@@ -89,31 +91,104 @@ if($user->isLoggedIn()){
         
         <div class="col-sm-9 col-md-10 main">
           <!--toggle sidebar button-->
-          <p class="visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
-          </p>
-
-          <!-- <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div> -->
+          
             <header>
-              <h4 class="page_title">Products</h4>
+              <h4 class="page_title">Dashboard</h4>
             </header>
+         <?php if($user->hasPermission('admin')){?>   
+            <div class="content-inner">
+              <div class="form-wrapper">
+                <div class="row">
+                  <h5> <a class="btn" href="admin.php?type=user">User privileges</a></h5>
+            <?php if(isset($_GET['type']) && !empty($_GET['type'])){?>
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Email Address</th>
+                              <th>Payment Date</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+      <?php $list = DB::getInstance()->query("SELECT * FROM users");
+            if(!$list->count()){
+                echo 'There is no user to Activate or diactivate';
+            }else{
+                foreach ($list->results() as $name){?>
+                      <?php
+                        if($name->user_approved == '1'){
+                            $state = "active";
+                        }else{
+                          $state = "success";
+                        }
+                      ?>
+
+                      <tr class="<?php echo $state;?>">
+                        <?php if(!$name->is_admin == '1'){?>
+                        <td><?php echo $name->username ?></td>
+                        <td><?php echo $name->email ?></td>
+                        <td><?php echo $name->phone ?></td>
+                        <td><?php
+                          if($name->user_approved == '1'){        
+                              echo "<a class='btn btn-sm' href='activated_or_die.php?u_id=$name->id&type=$name->user_approved'>activate</a>";
+                          }else{
+                              echo "<a class='btn btn-sm' href='activated_or_die.php?u_id=$name->id&type=$name->user_approved'>Deactivate</a>";
+                          }
+                          echo '</td><td><button type="button"  class="btn btn-green btn-sm" data-toggle="modal" data-target="#edit"><i class="fa fa-edit fa-1x"></i></button>
+                          <button type="button" class="btn btn-red btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-remove fa-1x"></i></button>';
+                          } 
+                          ?>
+
+                        </td>
+                      </tr>
+                     <?php 
+                       }
+                     }
+                   ?>
+                      </tbody>
+                  </table>
+            <?php }?>
+                </div>
+            </div>
+          </div>
+      <?php }?>
+
+<style type="text/css">
+.btn-green{
+  background-color: #1abc9c;
+}
+
+.btn-red{
+  background-color: #9b59b6;
+}
+</style>
+        <!-- Trigger the modal with a button -->
+
+
+<!-- Modal -->
+<div id="delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
             <div class="content-inner">
               <div class="form-wrapper">
                 <form>
@@ -132,59 +207,12 @@ if($user->isLoggedIn()){
                       <input type="text" class="form-control" id="titles" placeholder="Article..3">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Publish
-                    </label>
-                  </div>
-                  </div>
+                  
                    <div class="clearfix">
                     <button type="submit" class="btn btn-primary">Publish</button>
                    </div>
                 </form>
               </div>
-
-          <div class="form-wrapper">
-            <div class="table-responsive">
-              <table class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1,001</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>dolor</td>
-                    <td>sit</td>
-                  </tr>
-                  <tr>
-                    <td>1,002</td>
-                    <td>amet</td>
-                    <td>consectetur</td>
-                    <td>adipiscing</td>
-                    <td>elit</td>
-                  </tr>
-                  <tr>
-                    <td>1,003</td>
-                    <td>Integer</td>
-                    <td>nec</td>
-                    <td>odio</td>
-                    <td>Praesent</td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-            </div>
-          </div>
-
             </div>
             
             
@@ -192,9 +220,17 @@ if($user->isLoggedIn()){
 	</div>
 </div><!--/.container-->
 
-<footer>
-  <p class="pull-right">Developer Thusitha thiyushan ©2015 4it</p>
-</footer>
+<div class="footer-bottom-area">
+  <div class="container">
+            <div class="row">
+                <div class="pull-right">
+                    <div class="copyright">
+                        <p>&copy; 2015 4it All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">Thusitha Thiyushan</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 
     <!--scripts loaded here-->
     

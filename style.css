@@ -549,7 +549,7 @@ color: #999;
 padding: 35px 0 180px;}
 
 
-.footer-bottom-area {background: #000;color: #fff}
+.footer-bottom-area {background: #95a5a6;color: #95a5a6}
 .footer-about-us span {
   color: #5a88ca;
 }
@@ -618,9 +618,9 @@ padding: 35px 0 180px;}
 a {color: #0c84e4}
 a:hover, a:focus {color: #ecf0f1}
 .footer-bottom-area {
-  background: none repeat scroll 0 0 #000;
+  background: none repeat scroll 0 0 #95a5a6;
   color: #fff;
-  padding-bottom: 40px;
+  padding-bottom: 5px;
 }
 
 

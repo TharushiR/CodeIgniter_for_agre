@@ -61,13 +61,30 @@ if(Input::exists()){
       <link rel="stylesheet" href="css/responsive.css">
    </head>
    <body >
+    <style type="text/css">
+      .navbar-brand>img {
+         max-height: 100%;
+         height: 100%;
+         width: auto;
+         margin: 0 auto;
+
+
+         /* probably not needed anymore, but doesn't hurt */
+         -o-object-fit: contain;
+         object-fit: contain; 
+
+      }
+      </style>
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
          <div class="container-fluid">
             <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-               <span class="sr-only">navigation</span>
-               </button>
-               <a class="navbar-brand" href="index.php">Agri-World</a>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.php"><img src="logo.png" alt="Dispute Bills"></a>
             </div>
             <div class="navbar-collapse">
                <ul class="nav navbar-nav navbar-right">
@@ -158,7 +175,7 @@ if(Input::exists()){
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="./"><img src="img/logo.png"></a></h1>
+                        <h1><a href="./"><img src="logo.png"></a></h1>
                     </div>
                 </div>
                 
@@ -363,14 +380,56 @@ if(Input::exists()){
         </div>
       </div>
   </div>
+  <style type="text/css">
+      .social:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+ .social {
+     -webkit-transform: scale(0.8);
+     /* Browser Variations: */
+     
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+
+/*
+    Multicoloured Hover Variations
+*/
+ 
+ #social-fb:hover {
+     color: #3B5998;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+ }
+ #social-gp:hover {
+     color: #d34836;
+ }
+ #social-em:hover {
+     color: #f39c12;
+ }
+  </style>
       <!--/.container-->
       <div class="footer-bottom-area">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="pull-right">
                     <div class="copyright">
                         <p>&copy; 2015 4it All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">Thusitha Thiyushan</a></p>
                     </div>
+                </div>
+                <div class="pull-left">
+                   <p>
+                    <a href="https://www.facebook.com/bootsnipp"><i class="fa fa-facebook-square fa-3x social"></i></a>
+                    <a href="https://twitter.com/bootsnipp"><i class="fa fa-twitter-square fa-3x social"></i></a>
+                    <a href="https://plus.google.com/+Bootsnipp-page"><i class="fa fa-google-plus-square fa-3x social"></i></a>
+                    <a href="mailto:bootsnipp@gmail.com"><i class="fa fa-envelope-square fa-3x social"></i></a>
+                   </p>
                 </div>
             </div>
         </div>
