@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2015 at 09:40 AM
+-- Generation Time: Nov 20, 2015 at 06:14 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -58,18 +58,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `gender` varchar(10) NOT NULL,
   `phone` int(11) NOT NULL,
   `groups` int(11) NOT NULL,
-  `user_approved` text NOT NULL
+  `user_approved` text NOT NULL,
+  `is_admin` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `email`, `name`, `nic`, `joined`, `gender`, `phone`, `groups`, `user_approved`) VALUES
-(5, 'thusitha', '5f41b4464d99c25484dfe2de81e242b6993bd92ff8a308ed843284b586e2a8a9', 'ÝGÂdô”\ZihFrÿn|.å—Û\\àº®\\ïG°‘æ', '', 'thusitha pradeep', '', '2015-10-04 12:26:19', '', 0, 1, '2'),
-(9, 'test2', 'bc8ef1e0381c7458727da6046317b090885178ff7931d0769fdac649a31fa6c8', '¥GwT+&~V''‰>ŒÌ’2²—åZ…-Ã>©5²m©—', 'test@gmail.com', 'test2', '235235', '2015-10-06 18:03:52', 'Male', 235235, 1, '1'),
-(10, 'admin', '3c87fce7b9db136b22941051ddbe879b47184396564112576b15de70e02ffff1', 'F7ŸËÐpNZ™„j½ô’{Ä$†ð˜°³„áž%½n', 'admin@gmail.com', 'admin', '9211112321', '2015-10-06 18:06:22', '', 991281272, 2, '2'),
-(11, 'manee', '48d173da1fa8b7fc0e46ceb2424054e1892168ce4df3edff1200d52c8db21c77', 'ÜËD&¡†Æ@P''©SÞÖ¬Çýªâ”.š*1•_#', 'manee@gmail.com', 'maneesha', '932647236', '2015-10-19 00:31:15', 'Female', 253789344, 1, '1');
+INSERT INTO `users` (`id`, `username`, `password`, `salt`, `email`, `name`, `nic`, `joined`, `gender`, `phone`, `groups`, `user_approved`, `is_admin`) VALUES
+(5, 'thusitha', '5f41b4464d99c25484dfe2de81e242b6993bd92ff8a308ed843284b586e2a8a9', 'ÝGÂdô”\ZihFrÿn|.å—Û\\àº®\\ïG°‘æ', 'thusitha@gmail.com', 'thusitha pradeep', '', '2015-10-04 12:26:19', '', 755844848, 1, '2', 0),
+(9, 'test2', 'bc8ef1e0381c7458727da6046317b090885178ff7931d0769fdac649a31fa6c8', '¥GwT+&~V''‰>ŒÌ’2²—åZ…-Ã>©5²m©—', 'test@gmail.com', 'test2', '235235', '2015-10-06 18:03:52', 'Male', 778545848, 1, '1', 0),
+(10, 'admin', '3c87fce7b9db136b22941051ddbe879b47184396564112576b15de70e02ffff1', 'F7ŸËÐpNZ™„j½ô’{Ä$†ð˜°³„áž%½n', 'admin@gmail.com', 'admin', '9211112321', '2015-10-06 18:06:22', '', 991281272, 2, '2', 1),
+(11, 'manee', '48d173da1fa8b7fc0e46ceb2424054e1892168ce4df3edff1200d52c8db21c77', 'ÜËD&¡†Æ@P''©SÞÖ¬Çýªâ”.š*1•_#', 'manee@gmail.com', 'maneesha', '932647236', '2015-10-19 00:31:15', 'Female', 253789344, 1, '1', 0);
 
 -- --------------------------------------------------------
 
