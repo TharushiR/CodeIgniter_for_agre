@@ -1,3 +1,6 @@
+.navbar {
+  font-size: 14px;
+}
 
  * Style tweaks
  * --------------------------------------------------
@@ -11,10 +14,41 @@ footer {
   padding-right: 15px;
   background-color: #fff;
 }
+#myModalLabel{
+  background-color: #3498db;
+  text-transform: uppercase;
+  border: none;
+  -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+  padding: 10px;
+}
 
-.footer-bottom-area {
+.modal-body {
+    margin-bottom: 0;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 16px;
+    margin-left: 25px;
+    margin-right: 20px;
+    font-size: 13px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #bdc3c7;
+}
+.footer {
   margin: 5px;
   padding: 5px;
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background:#bdc3c7;
 }
 .footer-wid-title {
   font-family: raleway;

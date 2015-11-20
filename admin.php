@@ -68,7 +68,7 @@ if($user->isLoggedIn()){
                 <span class="glyphicon glyphicon-edit"></span>
                 Edits
               </a></li>
-              <li><a href="addproduct.php">
+              <li><a href="#">
                 <span class="glyphicon glyphicon-pencil"></span>
                 Add New Products
               </a></li>
@@ -106,7 +106,7 @@ if($user->isLoggedIn()){
                           <tr>
                               <th>Name</th>
                               <th>Email Address</th>
-                              <th>Payment Date</th>
+                              <th>Mobile Number</th>
                               <th>Status</th>
                               <th>Action</th>
                           </tr>
@@ -124,7 +124,55 @@ if($user->isLoggedIn()){
                           $state = "success";
                         }
                       ?>
+                      <!-- Modal -->
+                      <div id="delete" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                              <p class="red">ARE YOU SURE YOU WANT TO DELETE THIS USER?</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn " data-dismiss="modal">Yes</button>
+                              <button type="button" class="btn " data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
+                      <div id="edit" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h5 id="myModalLabel"><i class="fa fa-edit"></i>  Edit User Details</h5>
+                            </div>
+                              <div class="modal-body">
+                              <form>
+                                <div class="form-group">
+                                    <label for="Text">Username</label>
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Username" value="<?php echo $name->username ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress">Name</label>
+                                    <input type="text" class="form-control" id="Name" placeholder="Full Name" value="<?php echo $name->name ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail">Email</label>
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo $name->email ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputMobile">Mobile No</label>
+                                    <input type="Mobile" class="form-control" id="inputMobile" placeholder="Mobile No" value="<?php echo $name->phone ?>">
+                                </div>
+                                <div class="form-group">
+                                  <button type="submit" class="btn btn-primary">Add</button>
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
                       <tr class="<?php echo $state;?>">
                         <?php if(!$name->is_admin == '1'){?>
                         <td><?php echo $name->username ?></td>
@@ -151,6 +199,7 @@ if($user->isLoggedIn()){
                   </table>
             <?php }?>
                 </div>
+                <br>
             </div>
           </div>
       <?php }?>
@@ -159,68 +208,20 @@ if($user->isLoggedIn()){
 .btn-green{
   background-color: #1abc9c;
 }
+.red {
+  color: #e74c3c;
+}
 
 .btn-red{
-  background-color: #9b59b6;
+  background-color: #e74c3c;
 }
 </style>
         <!-- Trigger the modal with a button -->
-
-
-<!-- Modal -->
-<div id="delete" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-            <div class="content-inner">
-              <div class="form-wrapper">
-                <form>
-                  <div class="row form-group">
-                    <label class="sr-only">Title</label>
-                    <div class="col-md-3">
-                      <span class="">Title 1</span>
-                      <input type="text" class="form-control" id="titles" placeholder="Article..1">
-                    </div>
-                    <div class="col-md-3">
-                      <span class="">Title 2</span>
-                      <input type="text" class="form-control" id="titles" placeholder="Article..2">
-                    </div>
-                    <div class="col-md-3">
-                      <span class="">Title 3</span>
-                      <input type="text" class="form-control" id="titles" placeholder="Article..3">
-                    </div>
-                  </div>
-                  
-                   <div class="clearfix">
-                    <button type="submit" class="btn btn-primary">Publish</button>
-                   </div>
-                </form>
-              </div>
-            </div>
-            
-            
       </div><!--/row-->
 	</div>
 </div><!--/.container-->
 
-<div class="footer-bottom-area">
+<div class="footer">
   <div class="container">
             <div class="row">
                 <div class="pull-right">
