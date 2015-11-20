@@ -68,7 +68,7 @@ if($user->isLoggedIn()){
                 <span class="glyphicon glyphicon-edit"></span>
                 Edits
               </a></li>
-              <li><a href="#">
+              <li><a href="addproduct.php">
                 <span class="glyphicon glyphicon-pencil"></span>
                 Add New Products
               </a></li>
