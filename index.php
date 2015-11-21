@@ -89,6 +89,7 @@ if(Input::exists()){
             <div class="navbar-collapse">
                <ul class="nav navbar-nav navbar-right">
                   <?php if(!$user->isLoggedIn()){
+                    $u = Null;
                     ?>
                   <li>
                      <p class="navbar-text">Already have an account?</p>
@@ -131,7 +132,10 @@ if(Input::exists()){
                         </li>
                      </ul>
                   </li>
-                  <?php }else{?>
+                  <?php }else{
+                    $u = DB::getInstance()->Getsum('cost','cart',$user->data()->username);
+                    ?>
+
                   <li class="dropdown">
                      <a href="profile.php?user=<?php echo escape($user->data()->username);?>" class="dropdown-toggle" data-toggle="dropdown">Hello! <b><?php echo escape($user->data()->username);?></b> <span class="caret"></span></a>
                       <ul id="login-dp" class="dropdown-menu">
@@ -197,7 +201,7 @@ $num_rows = mysql_num_rows($result);
                       <a href="clear.php"><span class="cart-amunt">Clear</span></a>
                     </div>
                     <div class="shopping-item">
-                        <a href="order.php">Cart - <span class="cart-amunt"><?php echo "Rs. ".DB::getInstance()->Getsum('cost','cart',escape($user->data()->username));?></span> <i class="fa fa-shopping-cart"></i><span class="product-count"><?php echo $num_rows;?></span></a>
+                        <a href="order.php">Cart - <span class="cart-amunt"><?php echo "Rs. ".$u;?></span> <i class="fa fa-shopping-cart"></i><span class="product-count"><?php echo $num_rows;?></span></a>
                     </div>
 
                 </div>
