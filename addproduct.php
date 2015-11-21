@@ -135,21 +135,17 @@ if($user->isLoggedIn()){
                       <span class="">Product Type</span>
                       <!-- <input type="text" class="form-control" id="titles" placeholder="Enter Product Type"> -->
                       <select class="form-control">
-                        <option>----</option>
-                        <option>hello</option>
-                        <option>hello</option>
+                        <option>Fertilizer</option>
+                        <option>Insecticide</option>
+                        <option>Fungicide</option>
+                        <option>Weedicice</option>
                       </select>
-                    </div>
+                      <br>
+                    </div> 
                     <div class="col-md-3">
                       <span class="">Start Quantity</span>
                       <input type="text" class="form-control" id="titles" placeholder="Enter Quantity">
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Publish
-                    </label>
                   </div>
                   </div>
                    <div class="clearfix">
@@ -163,36 +159,37 @@ if($user->isLoggedIn()){
               <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
-                    <th>Header</th>
+                    <th>Product name</th>
+                    <th>quantity</th>
+                    <th>recieved_price</th>
+                    <th>selling_price </th>
+                    <th>product_type</th>
+                    <th>Image</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
+
+               <?php 
+               $list =DB::getInstance()->query("SELECT * FROM product_details");
+               if(!$list->count()){
+                  echo "no data";
+               }else{
+                foreach ($list->results() as $key) {
+                 ?>   
                   <tr>
-                    <td>1,001</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>dolor</td>
-                    <td>sit</td>
+                    <td><?php echo $key->product_id?></td>
+                    <td><?php echo $key->product_name?></td>
+                    <td><?php echo $key->quantity?></td>
+                    <td><?php echo $key->recieved_price?></td>
+                    <td><?php echo $key->selling_price?></td>
+                    <td><?php echo $key->product_type?></td>
+                    <td><?php echo $key->image?></td>
                   </tr>
-                  <tr>
-                    <td>1,002</td>
-                    <td>amet</td>
-                    <td>consectetur</td>
-                    <td>adipiscing</td>
-                    <td>elit</td>
-                  </tr>
-                  <tr>
-                    <td>1,003</td>
-                    <td>Integer</td>
-                    <td>nec</td>
-                    <td>odio</td>
-                    <td>Praesent</td>
-                  </tr>
-                  
+         <?php
+                }
+               }
+               ?>
                 </tbody>
               </table>
             </div>
@@ -205,9 +202,7 @@ if($user->isLoggedIn()){
 	</div>
 </div><!--/.container-->
 
-<footer>
-  <p class="pull-right">Developer Thusitha thiyushan ©2015 4it</p>
-</footer>
+
 
     <!--scripts loaded here-->
     
