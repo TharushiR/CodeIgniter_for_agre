@@ -89,11 +89,6 @@ if(Input::exists()){
             <div class="navbar-collapse">
                <ul class="nav navbar-nav navbar-right">
                   <?php if(!$user->isLoggedIn()){
-                    if(!empty($user->data()->username)){
-                      $u = $user->data()->username;
-                    }else{
-                      $u = "";
-                    };
                     ?>
                   <li>
                      <p class="navbar-text">Already have an account?</p>
@@ -202,7 +197,7 @@ $num_rows = mysql_num_rows($result);
                       <a href="clear.php"><span class="cart-amunt">Clear</span></a>
                     </div>
                     <div class="shopping-item">
-                        <a href="order.php">Cart - <span class="cart-amunt"><?php echo "Rs. ".DB::getInstance()->Getsum('cost','cart',$u);?></span> <i class="fa fa-shopping-cart"></i><span class="product-count"><?php echo $num_rows;?></span></a>
+                        <a href="order.php">Cart - <span class="cart-amunt"><?php echo "Rs. ".DB::getInstance()->Getsum('cost','cart',escape($user->data()->username));?></span> <i class="fa fa-shopping-cart"></i><span class="product-count"><?php echo $num_rows;?></span></a>
                     </div>
 
                 </div>
