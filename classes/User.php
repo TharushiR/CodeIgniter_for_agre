@@ -145,4 +145,14 @@ class User {
 
     }
 
+    public function search($table, $same, $keyword, $field){
+        $search = DB::getInstance()->query("SELECT * FROM $table WHERE $same = '$keyword'");
+        if(!$search->count()){
+            echo '';
+        }else{
+            foreach($search->results() as $s) {
+                return $s->$field;
+            }
+        }
+    }
 } 

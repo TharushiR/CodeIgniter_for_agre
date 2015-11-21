@@ -82,6 +82,22 @@ class DB {
         return $this->action('SELECT *', $table, $where);
     }
 
+    public function Getsum($tatol, $table ,$sup_code){
+
+        $query = $this->_pdo->prepare("SELECT SUM($tatol) FROM $table WHERE `username` = ?" );
+        $query->bindValue(1, $sup_code);
+
+        try{ $query->execute();   
+
+        $total = $query->fetch(PDO::FETCH_NUM);
+        $summ = $total[0]; // 0 is the first array. here array is only one.
+        return $summ; 
+
+        } catch(PDOException $e){
+            die($e->getMessage());
+        }   
+    }
+    
     public function getAll($table) {
         return $this->action('SELECT *', $table);
     }

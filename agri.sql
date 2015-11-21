@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2015 at 06:14 PM
+-- Generation Time: Nov 21, 2015 at 02:54 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `agri`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE IF NOT EXISTS `cart` (
+  `id` int(11) NOT NULL,
+  `product_id` varchar(25) NOT NULL,
+  `p_name` varchar(25) NOT NULL,
+  `cost` int(11) NOT NULL,
+  `username` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -39,6 +53,32 @@ CREATE TABLE IF NOT EXISTS `groups` (
 INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
 (1, 'Standard user', ''),
 (2, 'Administrator', '{"admin": 1}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `product_id` int(11) NOT NULL,
+  `p_name` varchar(55) NOT NULL,
+  `p_description` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `store` int(11) NOT NULL,
+  `cost` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`product_id`, `p_name`, `p_description`, `image`, `store`, `cost`) VALUES
+(1, 'kdct-234', 'htht  abaAFDSF AS DF ASDF ASD F SDAF SA FASDFADSFAS A AS S', 'img/item1.jpg', 23, 234),
+(2, 'cHEMI-23', 'AS  D DA S A FA A', 'img/item2.jpg', 2, 2524),
+(3, 'TRVS-4', 'SDVSD DFS SD ', 'img/item3.jpg', 43, 765),
+(4, 'WEF 6', 'WEFWV A BE  A ', 'img/item4.jpg', 54, 543),
+(5, 'WEG07-D', 'sdb sf  sd ', 'img/item5.jpg', 3, 987);
 
 -- --------------------------------------------------------
 
@@ -67,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `salt`, `email`, `name`, `nic`, `joined`, `gender`, `phone`, `groups`, `user_approved`, `is_admin`) VALUES
-(5, 'thusitha', '5f41b4464d99c25484dfe2de81e242b6993bd92ff8a308ed843284b586e2a8a9', 'ÝGÂdô”\ZihFrÿn|.å—Û\\àº®\\ïG°‘æ', 'thusitha@gmail.com', 'thusitha pradeep', '', '2015-10-04 12:26:19', '', 755844848, 1, '2', 0),
+(5, 'thusitha', '5f41b4464d99c25484dfe2de81e242b6993bd92ff8a308ed843284b586e2a8a9', 'ÝGÂdô”\ZihFrÿn|.å—Û\\àº®\\ïG°‘æ', 'test@gmail.com', 'test2', '', '2015-10-04 12:26:19', '', 778545848, 1, '2', 0),
 (9, 'test2', 'bc8ef1e0381c7458727da6046317b090885178ff7931d0769fdac649a31fa6c8', '¥GwT+&~V''‰>ŒÌ’2²—åZ…-Ã>©5²m©—', 'test@gmail.com', 'test2', '235235', '2015-10-06 18:03:52', 'Male', 778545848, 1, '1', 0),
 (10, 'admin', '3c87fce7b9db136b22941051ddbe879b47184396564112576b15de70e02ffff1', 'F7ŸËÐpNZ™„j½ô’{Ä$†ð˜°³„áž%½n', 'admin@gmail.com', 'admin', '9211112321', '2015-10-06 18:06:22', '', 991281272, 2, '2', 1),
 (11, 'manee', '48d173da1fa8b7fc0e46ceb2424054e1892168ce4df3edff1200d52c8db21c77', 'ÜËD&¡†Æ@P''©SÞÖ¬Çýªâ”.š*1•_#', 'manee@gmail.com', 'maneesha', '932647236', '2015-10-19 00:31:15', 'Female', 253789344, 1, '1', 0);
@@ -109,10 +149,22 @@ INSERT INTO `user_approved` (`id`, `name`, `approvedd`) VALUES
 --
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`);
 
 --
 -- Indexes for table `users`
@@ -137,10 +189,20 @@ ALTER TABLE `user_approved`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `users`
 --
