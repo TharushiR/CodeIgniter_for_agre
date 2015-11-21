@@ -58,7 +58,7 @@ if($user->isLoggedIn()){
          <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
            
             <ul id="side-bar" class="nav nav-sidebar">
-              <li class="active"><a href="#">
+              <li><a href="admin.php">
                 <span class="glyphicon glyphicon-tasks"></span>
                 Overview
               </a></li>
@@ -66,7 +66,7 @@ if($user->isLoggedIn()){
                 <span class="glyphicon glyphicon-edit"></span>
                 Edits
               </a></li>
-              <li><a href="addproduct.php">
+              <li class="active"><a href="addproduct.php">
                 <span class="glyphicon glyphicon-pencil"></span>
                 Add New Products
               </a></li>
@@ -112,7 +112,7 @@ if($user->isLoggedIn()){
             </div>
           </div> -->
             <header>
-              <h4 class="page_title">Products</h4>
+              <h4 class="page_title">Add Products</h4>
             </header>
             <div class="content-inner">
               <div class="form-wrapper">
@@ -120,16 +120,29 @@ if($user->isLoggedIn()){
                   <div class="row form-group">
                     <label class="sr-only">Title</label>
                     <div class="col-md-3">
-                      <span class="">Title 1</span>
-                      <input type="text" class="form-control" id="titles" placeholder="Article..1">
+                      <span class="">name</span>
+                      <input type="text" class="form-control" id="titles" placeholder="Enter name">
                     </div>
                     <div class="col-md-3">
-                      <span class="">Title 2</span>
-                      <input type="text" class="form-control" id="titles" placeholder="Article..2">
+                      <span class="">Recieving Price</span>
+                      <input type="text" class="form-control" id="titles" placeholder="Enter Recieving Price">
                     </div>
                     <div class="col-md-3">
-                      <span class="">Title 3</span>
-                      <input type="text" class="form-control" id="titles" placeholder="Article..3">
+                      <span class="">Selling Price</span>
+                      <input type="text" class="form-control" id="titles" placeholder="Enter Selling Price">
+                    </div>
+                    <div class="col-md-3">
+                      <span class="">Product Type</span>
+                      <!-- <input type="text" class="form-control" id="titles" placeholder="Enter Product Type"> -->
+                      <select class="form-control">
+                        <option>----</option>
+                        <option>hello</option>
+                        <option>hello</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <span class="">Start Quantity</span>
+                      <input type="text" class="form-control" id="titles" placeholder="Enter Quantity">
                     </div>
                   </div>
                   <div class="form-group">
