@@ -156,8 +156,8 @@ if(Input::exists()){
                 <?php if($user->hasPermission('admin')){?>
                   <li><a href="admin.php">Dashboad</a></li>
                   <?php }}?>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>  Cart</a></li>
+                  <li><a href="index.php">Home</a></li>
+                  <li><a href="order.php"><span class="glyphicon glyphicon-shopping-cart"></span>  Cart</a></li>
                   <li><a href="#">About Us</a></li>
                </ul>
                <form class="navbar-form navbar-right">
@@ -170,6 +170,18 @@ if(Input::exists()){
 <?php if(!empty($msg)){
   echo '<script> alert("'.$msg.'"); </script>';
 }?>
+
+
+<?php
+
+$link = mysql_connect("localhost", "root", "");
+mysql_select_db("agri", $link);
+
+$result = mysql_query("SELECT * FROM cart", $link);
+$num_rows = mysql_num_rows($result);
+
+?>
+
       <div class="site-branding-area">
         <div class="container">
             <div class="row">
@@ -181,8 +193,12 @@ if(Input::exists()){
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.html">Cart - <span class="cart-amunt">Rs. 100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                      <a href="clear.php"><span class="cart-amunt">Clear</span></a>
                     </div>
+                    <div class="shopping-item">
+                        <a href="order.php">Cart - <span class="cart-amunt"><?php echo "Rs. ".DB::getInstance()->Getsum('cost','cart',$user->data()->username);?></span> <i class="fa fa-shopping-cart"></i><span class="product-count"><?php echo $num_rows;?></span></a>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -250,125 +266,28 @@ if(Input::exists()){
                           <div class="latest-product">
                               <h2 class="section-title">Latest Products</h2>
                               <div class="product-carousel">
+ <?php $list = DB::getInstance()->query("SELECT * FROM products");
+            if(!$list->count()){
+                echo 'There is no user to Activate or diactivate';
+            }else{
+                foreach ($list->results() as $name){?>
                                   <div class="single-product">
                                       <div class="product-f-image">
-                                          <img src="img/item1.jpg" alt="">
+                                          <img src="<?php echo $name->image?>" alt="">
                                           <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                              <a href="cart.php?id=<?php echo $name->product_id?>" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
                                               <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                           </div>
                                       </div>
                                       
-                                      <h2><a href="single-product.html">ARICON- 205</a></h2>
+                                      <h2><a href="single-product.html"><?php echo $name->p_name?></a></h2>
                                       
                                       <div class="product-carousel-price">
-                                          <ins>Rs. 700.00</ins> <del>Rs. 100.00</del>
+                                          <ins>Rs. <?php echo $name->cost?></ins> <del>Rs. 100.00</del>
                                       </div> 
                                   </div>
-                                  <div class="single-product">
-                                      <div class="product-f-image">
-                                          <img src="img/item2.jpg" alt="">
-                                          <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                              <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                          </div>
-                                      </div>
-                                      
-                                      <h2>NKGD 1320</h2>
-                                      <div class="product-carousel-price">
-                                          <ins>Rs. 899.00</ins> <del>Rs. 999.00</del>
-                                      </div> 
-                                  </div>
-                                  <div class="single-product">
-                                      <div class="product-f-image">
-                                          <img src="img/item3.jpg" alt="">
-                                          <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                              <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                          </div>
-                                      </div>
-                                      
-                                      <h2>PIKO C 2015</h2>
+<?php }}?>
 
-                                      <div class="product-carousel-price">
-                                          <ins>Rs. 400.00</ins> <del>Rs. 425.00</del>
-                                      </div>                                 
-                                  </div>
-                                  <div class="single-product">
-                                      <div class="product-f-image">
-                                          <img src="img/item4.jpg" alt="">
-                                          <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                              <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                          </div>
-                                      </div>
-                                      
-                                      <h2><a href="single-product.html">BUBEL GUM</a></h2>
-
-                                      <div class="product-carousel-price">
-                                          <ins>Rs. 200.00</ins> <del>Rs. 225.00</del>
-                                      </div>                            
-                                  </div>
-                                  <div class="single-product">
-                                      <div class="product-f-image">
-                                          <img src="img/item5.jpg" alt="">
-                                          <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                              <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                          </div>
-                                      </div>
-                                      
-                                      <h2>ADIKmi C432-B 6</h2>
-
-                                      <div class="product-carousel-price">
-                                          <ins>Rs. 1200.00</ins> <del>Rs. 1355.00</del>
-                                      </div>                                 
-                                  </div>
-                                  <div class="single-product">
-                                      <div class="product-f-image">
-                                          <img src="img/item7.jpg" alt="">
-                                          <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                              <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                          </div>
-                                      </div>
-                                      
-                                      <h2>Chemi C432-B 6</h2>
-
-                                      <div class="product-carousel-price">
-                                          <ins>Rs. 1200.00</ins> <del>Rs. 1355.00</del>
-                                      </div>                                 
-                                  </div>
-                                  <div class="single-product">
-                                      <div class="product-f-image">
-                                          <img src="img/item8.jpg" alt="">
-                                          <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                              <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                          </div>
-                                      </div>
-                                      
-                                      <h2>Chemi C432-B 6</h2>
-
-                                      <div class="product-carousel-price">
-                                          <ins>Rs. 1200.00</ins> <del>Rs. 1355.00</del>
-                                      </div>                                 
-                                  </div>
-                                  <div class="single-product">
-                                      <div class="product-f-image">
-                                          <img src="img/item6.jpg" alt="">
-                                          <div class="product-hover">
-                                              <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                              <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                          </div>
-                                      </div>
-                                      
-                                      <h2><a href="single-product.html">LEVEL FUll 4</a></h2>
-
-                                      <div class="product-carousel-price">
-                                          <ins>Rs. 400.00</ins>
-                                      </div>                            
-                                  </div>
                               </div>
                           </div>
                       </div>

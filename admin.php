@@ -81,11 +81,6 @@ if($user->isLoggedIn()){
                 Reports
               </a></li>
             </ul>
-            <ul class="nav nav-sidebar">
-              <li><a href="">Nav item again</a></li>
-              <li><a href="">One more nav</a></li>
-              <li><a href="">Another nav item</a></li>
-            </ul>
           
         </div><!--/span-->
         
@@ -124,55 +119,7 @@ if($user->isLoggedIn()){
                           $state = "success";
                         }
                       ?>
-                      <!-- Modal -->
-                      <div id="delete" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-body">
-                              <p class="red">ARE YOU SURE YOU WANT TO DELETE THIS USER?</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn " data-dismiss="modal">Yes</button>
-                              <button type="button" class="btn " data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div id="edit" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h5 id="myModalLabel"><i class="fa fa-edit"></i>  Edit User Details</h5>
-                            </div>
-                              <div class="modal-body">
-                              <form>
-                                <div class="form-group">
-                                    <label for="Text">Username</label>
-                                    <input type="text" class="form-control" id="inputEmail" placeholder="Username" value="<?php echo $name->username ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress">Name</label>
-                                    <input type="text" class="form-control" id="Name" placeholder="Full Name" value="<?php echo $name->name ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputEmail">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" value="<?php echo $name->email ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputMobile">Mobile No</label>
-                                    <input type="Mobile" class="form-control" id="inputMobile" placeholder="Mobile No" value="<?php echo $name->phone ?>">
-                                </div>
-                                <div class="form-group">
-                                  <button type="submit" class="btn btn-primary">Add</button>
-                                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
+                      
                       <tr class="<?php echo $state;?>">
                         <?php if(!$name->is_admin == '1'){?>
                         <td><?php echo $name->username ?></td>
@@ -184,9 +131,11 @@ if($user->isLoggedIn()){
                           }else{
                               echo "<a class='btn btn-sm' href='activated_or_die.php?u_id=$name->id&type=$name->user_approved'>Deactivate</a>";
                           }
-                          echo '</td><td><button type="button"  class="btn btn-green btn-sm" data-toggle="modal" data-target="#edit"><i class="fa fa-edit fa-1x"></i></button>
-                          <button type="button" class="btn btn-red btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-remove fa-1x"></i></button>';
-                          } 
+                          echo '</td>
+<td>
+    <button href="#" data-toggle="modal" class="btn btn-green btn-sm" data-target="#edit'.$name->id.'" ><i class="fa fa-edit fa-1x"></i></button>
+    <button href="#" data-toggle="modal" class="btn btn-red btn-sm" data-target="#delete'.$name->id.'" ><i class="fa fa-remove fa-1x"></i></button>
+</td>';} 
                           ?>
 
                         </td>
@@ -203,6 +152,97 @@ if($user->isLoggedIn()){
             </div>
           </div>
       <?php }?>
+
+<?php if(!empty($list)){foreach ($list->results() as $name){ ?>
+    <div class="modal fade" id="edit<?php echo $name->id; ?>" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel<?php echo $name->id; ?>" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 id="myModalLabel"><i class="fa fa-edit"></i>  Edit User Details</h5>
+                </div>
+                  <div class="modal-body">
+                    <?php
+                    if(Input::exists()){
+                      if(Token::check(Input::get('token'))){
+                          $validation = new Validation();
+
+                          $validation = $validation->check($_POST, array(
+                              'name'  => array(
+                                  'required' => true,
+                                  'min'      => 2,
+                                  'max'      => 50
+                              )
+                          ));
+
+                          if($validation->passed()){
+                              try{
+                                  $user->update(array(
+                                      'username'  => Input::get('username'),
+                                      'email'     => Input::get('email'),
+                                      'name'      => Input::get('name'),
+                                      'phone'     => Input::get('phone')
+                                  ) , $name->id);
+
+                                  Session::flash('success', 'Information Updated Successfully');
+                                  Redirect::to('admin.php');
+
+                              }catch (Exception $e){
+                                  die($e->getMessage());
+                              }
+                          }else{
+                              pre($validation->errors());
+                          }
+                      }
+                  }
+
+                    ?>
+                  <form action="" method="post">
+                    <div class="form-group">
+                        <label for="Text">Username</label>
+                        <input type="text" class="form-control" name="username" id="inputEmail" placeholder="Username" value="<?php echo $name->username ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Name</label>
+                        <input type="text" class="form-control" name="name" id="Name" placeholder="Full Name" value="<?php echo $name->name ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email" value="<?php echo $name->email ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMobile">Mobile No</label>
+                        <input type="Mobile" class="form-control" name="phone" id="inputMobile" placeholder="Mobile No" value="<?php echo $name->phone ?>">
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Add</button>
+                      <input type="hidden" name="token" value="<?php echo Token::generate();?>"/>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<?php foreach ($list->results() as $name){ ?>
+    <div class="modal fade" id="delete<?php echo $name->id; ?>" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel<?php echo $name->id; ?>" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-body">
+                <p class="red">ARE YOU SURE YOU WANT TO DELETE THIS USER?</p>
+                <h5><?php echo $name->name?></h5>
+              </div>
+              <div class="modal-footer">
+                <input class="btn " type=button onClick="parent.location='delete.php?u_id=<?php echo $name->id?>'" value='Yes'>
+                <button type="button" class="btn " data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+<?php }} ?>
 
 <style type="text/css">
 .btn-green{
