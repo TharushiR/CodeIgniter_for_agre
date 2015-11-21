@@ -178,18 +178,33 @@ if($user->isLoggedIn()){
                 foreach ($list->results() as $key) {
                  ?>   
                   <tr>
-                    <td><?php echo $key->product_id?></td>
                     <td><?php echo $key->product_name?></td>
                     <td><?php echo $key->quantity?></td>
                     <td><?php echo $key->recieved_price?></td>
                     <td><?php echo $key->selling_price?></td>
                     <td><?php echo $key->product_type?></td>
                     <td><?php echo $key->image?></td>
+                    <td><?php
+                          echo '<button type="button"  class="btn btn-green btn-sm" data-toggle="modal" data-target="#edit"><i class="fa fa-edit fa-1x"></i></button>
+                          <button type="button" class="btn btn-red btn-sm" data-toggle="modal" data-target="#delete"><i class="fa fa-remove fa-1x"></i></button>';
+                          
+                          ?>
+
+                        </td>
                   </tr>
          <?php
                 }
                }
                ?>
+               <style type="text/css">
+                .btn-green{
+                background-color: #1abc9c;
+                }
+
+                .btn-red{
+                background-color: #FF6347;
+                }
+                </style>
                 </tbody>
               </table>
             </div>
