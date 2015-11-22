@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2015 at 02:54 PM
+-- Generation Time: Nov 22, 2015 at 12:09 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(64) NOT NULL,
   `salt` varchar(32) NOT NULL,
   `email` varchar(25) NOT NULL,
-  `name` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `address` varchar(50) CHARACTER SET latin1 NOT NULL,
   `nic` varchar(10) NOT NULL,
   `joined` datetime NOT NULL,
   `gender` varchar(10) NOT NULL,
@@ -100,13 +100,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `groups` int(11) NOT NULL,
   `user_approved` text NOT NULL,
   `is_admin` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `email`, `name`, `nic`, `joined`, `gender`, `phone`, `groups`, `user_approved`, `is_admin`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `salt`, `email`, `address`, `nic`, `joined`, `gender`, `phone`, `groups`, `user_approved`, `is_admin`) VALUES
 (5, 'thusitha', '5f41b4464d99c25484dfe2de81e242b6993bd92ff8a308ed843284b586e2a8a9', 'ÝGÂdô”\ZihFrÿn|.å—Û\\àº®\\ïG°‘æ', 'test@gmail.com', 'test2', '', '2015-10-04 12:26:19', '', 778545848, 1, '2', 0),
 (9, 'test2', 'bc8ef1e0381c7458727da6046317b090885178ff7931d0769fdac649a31fa6c8', '¥GwT+&~V''‰>ŒÌ’2²—åZ…-Ã>©5²m©—', 'test@gmail.com', 'test2', '235235', '2015-10-06 18:03:52', 'Male', 778545848, 1, '1', 0),
 (10, 'admin', '3c87fce7b9db136b22941051ddbe879b47184396564112576b15de70e02ffff1', 'F7ŸËÐpNZ™„j½ô’{Ä$†ð˜°³„áž%½n', 'admin@gmail.com', 'admin', '9211112321', '2015-10-06 18:06:22', '', 991281272, 2, '2', 1),
@@ -207,7 +207,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `users_session`
 --
