@@ -176,7 +176,7 @@ if(Input::exists()){
         <div id="login-overlay" class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel">Login to <b>AGRiworldStore.Lk</b></h4> or go back to our <a href="./index.jsp">main site</a>.
+              <h4 class="modal-title" id="myModalLabel">Login to <b>AGRiworldStore.Lk</b></h4> or go back to our <a href="index.php">main site</a>.
           </div>
           <div class="modal-body">
               <div class="row">
@@ -224,6 +224,9 @@ if(Input::exists()){
                           <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
                           <li><span class="fa fa-check text-success"></span>Holiday discounts up to 30% off</li>
                       </ul>
+                      <div class="product-f-image">
+                        <img src="img/tk.png">
+                      </div>
                   </div>
               </div>
           </div>
@@ -353,7 +356,7 @@ if(Session::exists('error')){
                                             <?php if($user->isLoggedIn()){
                                             echo '<a href="cart.php?id='.$name->product_id.'" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>';
                                           }else{
-                                              echo '<a href="" data-toggle="modal" data-target="#reg" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>';
+                                              echo '<a href="" data-toggle="modal" data-target="#signup" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>';
                                             }
                                               ?>
                                               <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
@@ -379,16 +382,6 @@ if(Session::exists('error')){
         </div>
       </div>
   </div>
-
-  <div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-body">
-                <h3 class="red">You have to register befor order</h3>
-              </div>
-            </div>
-          </div>
-        </div>
   <style type="text/css">
       .social:hover {
      -webkit-transform: scale(1.1);
