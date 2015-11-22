@@ -1,10 +1,6 @@
 <?php
 require_once 'core/init.php';
 
-if(Session::exists('success')){
-    echo Session::flash('success');
-}
-
 $user = new User();
 
 if(Input::exists()){
@@ -92,7 +88,8 @@ if(Input::exists()){
                     $u = Null;
                     ?>
                   <li>
-                     <p class="navbar-text">Already have an account?</p>
+
+                    <a href="" data-toggle="modal" data-target="#signup" >Already have an account?</a>
                   </li>
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
@@ -126,7 +123,7 @@ if(Input::exists()){
                                  </form>
                               </div>
                               <div class="bottom text-center">
-                                 New here ? <a href="#"><b>Join Us</b></a>
+                                 New here ? <a href="" data-toggle="modal" data-target="#signup"><b>Join Us</b></a>
                               </div>
                            </div>
                         </li>
@@ -175,15 +172,68 @@ if(Input::exists()){
 <?php if(!empty($msg)){
   echo '<script> alert("'.$msg.'"); </script>';
 }?>
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel" aria-hidden="true">
+        <div id="login-overlay" class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Login to <b>AGRiworldStore.Lk</b></h4> or go back to our <a href="./index.jsp">main site</a>.
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-xs-6">
+                      <div class="well">
+                          <form id="loginForm" action="register.php" method="POST">
+                              <div class="form-group">
+                                  <label for="username" class="control-label">Username</label>
+                                  <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off"/>
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="password" class="control-label">Password</label>
+                                  <input type="password" class="form-control" name="password" placeholder="password" value="" required="" title="Please enter your password">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="password" class="control-label">Password Again</label>
+                                  <input type="password" class="form-control" name="password_again" id="password_again" value="" autocomplete="off" placeholder="password Again" value="" required="" title="Please enter your password again">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                  <input type="email" class="form-control" name="email" id="email" value="" placeholder="Enter Your email" value="<?php echo escape(Input::get('email')); ?>" required="" title="Enter your email ">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                <label for="password" class="control-label">Addressl</label>
+                                  <input type="text" class="form-control" name="address" id="address" value="" placeholder="Enter Your Address" value="<?php echo escape(Input::get('address')); ?>" required="" title="Enter your address correct ">
+                                  <span class="help-block"></span>
+                              </div>
 
+                              <div id="loginErrorMsg" class="alert alert-error hide">Wrong username or password</div>
+                              <button type="submit" value="login" name="submit" class="btn btn-success btn-block">Register now!</button>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="col-xs-6">
+                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                      <ul class="list-unstyled" style="line-height: 2">
+                          <li><span class="fa fa-check text-success"></span> See all your orders</li>
+                          <li><span class="fa fa-check text-success"></span> Shipping is always free</li>
+                          <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+                          <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+                          <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+                          <li><span class="fa fa-check text-success"></span>Holiday discounts up to 30% off</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+        </div>
 
 <?php
-
-$link = mysql_connect("localhost", "root", "");
-mysql_select_db("agri", $link);
-
-$result = mysql_query("SELECT * FROM cart", $link);
-$num_rows = mysql_num_rows($result);
+$list = DB::getInstance()->query("SELECT * FROM cart");
 
 ?>
 
@@ -201,13 +251,33 @@ $num_rows = mysql_num_rows($result);
                       <a href="clear.php"><span class="cart-amunt">Clear</span></a>
                     </div>
                     <div class="shopping-item">
-                        <a href="order.php">Cart - <span class="cart-amunt"><?php echo "Rs. ".$u;?></span> <i class="fa fa-shopping-cart"></i><span class="product-count"><?php echo $num_rows;?></span></a>
+                        <a href="order.php">Cart - <span class="cart-amunt"><?php echo "Rs. ".$u;?></span> <i class="fa fa-shopping-cart"></i><span class="product-count"><?php echo $list->count();?></span></a>
                     </div>
 
                 </div>
             </div>
         </div>
     </div> <!-- End site branding area -->
+<style type="text/css">
+.alrt{
+  padding-left: 60px;
+  padding-right: 60px;
+}
+</style>
+    <div class="alrt">
+      <?php
+if(Session::exists('success')){
+    echo '<div class="alert alert-success">
+  <strong>Success!</strong> '.Session::flash('success').'
+</div>';
+}
+if(Session::exists('error')){
+    echo '<div class="alert alert-warning">
+  <strong>Warning!</strong> '.Session::flash('error').'
+</div>';
+}
+?>
+    </div>
 
     <div class="container-fluid">
       <div class="content">
@@ -236,7 +306,7 @@ $num_rows = mysql_num_rows($result);
                         <h2 class="caption title">
                           by one, get one <span class="primary">50% <strong>off</strong></span>
                         </h2>
-                        <h4 class="caption subtitle">Factory supplies & backpacks.*</h4>
+                        <h4 class="caption subtitle">Factory supplies & dilevery.*</h4>
                         <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
                       </div>
                     </li>
@@ -254,9 +324,9 @@ $num_rows = mysql_num_rows($result);
                         <h2 class="caption title">
                           PH-94 <span class="primary">Store <strong>KD300</strong></span>
                         </h2>
-                        <h4 class="caption subtitle">& Phone</h4>
+                        <h4 class="TIkale map">& Home Pack</h4>
                         <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                      </div>
+                      </div> 
                     </li>
                   </ul>
                 </div>
@@ -280,7 +350,12 @@ $num_rows = mysql_num_rows($result);
                                       <div class="product-f-image">
                                           <img src="<?php echo $name->image?>" alt="">
                                           <div class="product-hover">
-                                              <a href="cart.php?id=<?php echo $name->product_id?>" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                            <?php if($user->isLoggedIn()){
+                                            echo '<a href="cart.php?id='.$name->product_id.'" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>';
+                                          }else{
+                                              echo '<a href="" data-toggle="modal" data-target="#reg" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>';
+                                            }
+                                              ?>
                                               <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                           </div>
                                       </div>
@@ -304,6 +379,16 @@ $num_rows = mysql_num_rows($result);
         </div>
       </div>
   </div>
+
+  <div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="jobModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-body">
+                <h3 class="red">You have to register befor order</h3>
+              </div>
+            </div>
+          </div>
+        </div>
   <style type="text/css">
       .social:hover {
      -webkit-transform: scale(1.1);
