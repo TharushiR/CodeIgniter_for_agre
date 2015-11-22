@@ -232,7 +232,7 @@ if($user->isLoggedIn()){
             <div class="modal-content">
               <div class="modal-body">
                 <p class="red">ARE YOU SURE YOU WANT TO DELETE THIS USER?</p>
-                <h5><?php echo $name->name?></h5>
+                <h5><?php echo $name->username?></h5>
               </div>
               <div class="modal-footer">
                 <input class="btn " type=button onClick="parent.location='delete.php?u_id=<?php echo $name->id?>'" value='Yes'>
