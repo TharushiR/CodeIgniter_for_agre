@@ -48,10 +48,17 @@ if($user->isLoggedIn()){
         </div>
       </div>
 </nav>
-<br><br>
+<br><br><br><br><br>
 
 
 <?php
+
+$address = $_POST["address"];
+$date = $_POST["date"];
+$method = $_POST["method"];
+echo($method);
+
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -64,83 +71,11 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM cart";
-$result = $conn->query($sql);
+
 
 ?>
 
 
-
-<div class="container-fluid">
-      <br>
-        
-        <div class="col-sm-9 col-md-10 main">
-          <!--toggle sidebar button-->
-          
-            <header>
-              <h4 class="page_title">Hi <?php echo $user->data()->username?>! This is your shopping cart! </h4>
-            </header>  
-            <div class="content-inner">
-              <div class="form-wrapper">
-            <div class="table-responsive">
-              <table class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Cost</th>
-                    <th>Quantity</th>
-                  </tr>
-                </thead>
-	<?php
-           if ($result->num_rows > 0) {
-				 // output data of each row
-				 while($row = $result->fetch_assoc()) {
-				 ?>   
-			   <tbody>
-                  <tr>
-                    <td><?php echo $row["product_id"];?></td>
-                    <td><?php echo $row["p_name"];?></td>
-                    <td><?php echo "Rs.".$row["cost"];?></td>
-                    <td><input type="number" name="quantity" id="quantity" required></td>
-                  </tr>
-                </tbody>
-              </table>
-			  <?php
-			  }
-			} else {
-				 echo "0 results";
-			}
-?>
-			
-            </div>
-                </div>
-			</div>
-			<div class="content-inner col-md-6">
-              <div class="form-wrapper">
-				<form role="form" action="addorder.php" method="POST">
-					<div class="form-group">
-					  <label for="address">Delivery Address: </label>
-					  <input type="text"name="address" class="form-control" id="address" placeholder="Enter the address here" required>
-					</div>
-					<div class="form-group">
-					  <label for="date">Delivery Date: </label>
-					  <input type="date" name = "date" class="form-control" id="date" placeholder="Enter the date here" required>
-					</div>
-					<div class="form-group">
-					  <label for="method">Payment method: </label>
-					  <br>
-					  <label class="radio-inline"><input type="radio" name="method" value="Credit card" checked>Credit card payment</label>
-					  <label class="radio-inline"><input type="radio" name="method" value="Cash">Cash payment</label>
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				  </form>
-			  </div>
-			  </div>
-        <!-- Trigger the modal with a button -->
-      </div><!--/row-->
-	</div>
-</div><!--/.container-->
 
 <div class="footer">
   <div class="container">

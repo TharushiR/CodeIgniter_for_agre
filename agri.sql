@@ -37,6 +37,25 @@ CREATE TABLE IF NOT EXISTS `cart` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart`
+--
+
+CREATE TABLE IF NOT EXISTS `customer_orders` (
+  `username` varchar(25) NOT NULL,
+
+  `products` varchar(25) NOT NULL,
+  
+  `cost` int(11) NOT NULL,
+  `address` varchar(25) NOT NULL,
+  `delivery_date` Date  NOT NULL,
+  `method` varchar(25) NOT NULL
+  
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `groups`
 --
 
