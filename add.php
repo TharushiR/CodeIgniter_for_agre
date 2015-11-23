@@ -33,7 +33,7 @@ $email   = $_POST['email'];
 $comment  = $_POST['comment'];   
 
 if ( !is_numeric($name)){
-$sql="INSERT INTO fdbck (Name, Email, Comment, Date)
+$sql="INSERT INTO feedback (Name, Email, Comment, Date)
 VALUES ('$name','$email', '$comment', NOW())";
 //echo $sql;
 }
