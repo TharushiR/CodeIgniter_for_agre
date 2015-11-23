@@ -25,6 +25,17 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `cart`
 --
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `CM_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Comment` varchar(255) NOT NULL,
+  `Date` date NOT NULL,
+  PRIMARY KEY (`CM_ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
+
+
+
 
 CREATE TABLE IF NOT EXISTS `cart` (
   `id` int(11) NOT NULL,
